@@ -1,18 +1,32 @@
 import express from 'express'
 import Product from './models/product.js'
+import user_controller from './controllers/user.js'
+import session from 'express-session'
 
 const app = express()
 const hostname = '127.0.0.1'
-const port = 3001
+const port = 3000
 
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: false }))
+
+app.use(session({
+    secret: 'Ini adalah kode rahasia###',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
+}))
+
 app.set('view engine', 'ejs')
+
+app.get('/login', user_controller.login)
+app.get('/logout', user_controller.logout)
+app.post('/login', user_controller.auth)
 
 app.get('/', (req, res) => {
     Product.findAll()
         .then((products) => {
-            res.render('index', { products })
+            res.render('index', { products, user: req.session.user || '' })
         })
         .catch((error) => {
             console.log(error)
