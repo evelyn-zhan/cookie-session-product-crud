@@ -6,16 +6,38 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.2/css/bulma.min.css">
 
-        <title>Rest API - MVC</title>
+        <title>Home</title>
     </head>
 
     <body>
         <header>
-            
+            <nav class="px-5 py-2 navbar is-success" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <a href="/" class="navbar-item is-size-3 has-text-weight-bold has-text-white">Product Web</a>
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+
+                <div class="navbar-menu">
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="mx-3">
+                                <%= user.email %>
+                            </div>
+                            <div class="buttons">
+                                <%- (!user ? '<a href="/login" class="button is-light">Login</a>' : '<a href="/logout" class="button is-light">Logout</a>') %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </header>
 
-        <div id="app" class="px-6 py-4 has-background-white" style="height: 100vh;">
-            <h1 class="title has-text-black">Product List</h1>
+        <div id="app" class="px-6 py-5 has-background-white" style="height: 100vh;">
+            <h1 class="title has-text-black has-text-weight-semibold">Product List</h1>
 
             <div>
                 <a href="/create" class="button is-success has-text-white">Add New</a>
